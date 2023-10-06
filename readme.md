@@ -3,7 +3,7 @@ Use Docker to get a MySQL server running.
 Pull the image:
 
 ```
-docker pull mysql:8.1
+docker pull mysql:8.0
 ```
 
 Make a directory named `'data/'` at the root of your checkout of this repo.
