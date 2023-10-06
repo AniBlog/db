@@ -6,6 +6,8 @@ Pull the image:
 docker pull mysql:8.1
 ```
 
+Make a directory named `'data/'` at the root of your checkout of this repo.
+
 Run the container:
 
 ```
