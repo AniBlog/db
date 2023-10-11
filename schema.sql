@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `rss_aggregator` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `rss_aggregator`;
--- MySQL dump 10.13  Distrib 8.0.29, for macos12 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for macos11 (x86_64)
 --
 -- Host: 134.122.105.68    Database: rss_aggregator
 -- ------------------------------------------------------
@@ -50,7 +50,7 @@ CREATE TABLE `discovered_sites_queue` (
   PRIMARY KEY (`pk_prospect_id`),
   KEY `prospectFqdn_idx` (`fqdn`),
   KEY `state_idx` (`status`,`score` DESC,`encountered` DESC)
-) ENGINE=InnoDB AUTO_INCREMENT=22292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22353 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `discovered_youtube_channels` (
   `status` enum('accepted','pending','rejected') NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`pk_yt_channel_id`),
   UNIQUE KEY `channel_id_UNIQUE` (`channel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55187 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55909 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `files` (
   KEY `State_idx` (`state`),
   KEY `Created_idx` (`created` DESC),
   CONSTRAINT `PostFiles` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`pk_post_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=69947 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70346 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +152,7 @@ CREATE TABLE `media` (
   KEY `guid_INDEX` (`guid`),
   KEY `matchPostToMedia_idx` (`pk_media_id`,`auto_index`,`title`),
   KEY `startDates` (`start_date`,`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=18498 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18503 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +171,7 @@ CREATE TABLE `media_genres` (
   KEY `mediaWithGenre_idx` (`fk_media_id`),
   CONSTRAINT `genreWithMedia` FOREIGN KEY (`fk_genre_id`) REFERENCES `genres` (`pk_genre_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mediaWithGenre` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`pk_media_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9473967 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9521076 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `media_synonyms` (
   PRIMARY KEY (`pk_synonyms_id`),
   KEY `mediaSynonym_idx` (`fk_media_id`),
   CONSTRAINT `mediaSynonym` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`pk_media_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4616482 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4649737 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +205,7 @@ CREATE TABLE `media_titles` (
   PRIMARY KEY (`pk_media_title_id`),
   KEY `mediaTitles_idx` (`fk_media_id`),
   CONSTRAINT `mediaTitles` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`pk_media_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9666354 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9714744 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `post_content` (
   PRIMARY KEY (`pk_post_content_id`),
   KEY `contents_for_post_idx` (`fk_post_id`),
   CONSTRAINT `contents_for_post` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`pk_post_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=174063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=174536 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +241,7 @@ CREATE TABLE `post_media` (
   KEY `mediaPost_idx` (`fk_post_id`),
   CONSTRAINT `mediaPost` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`pk_post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `postMedia` FOREIGN KEY (`fk_media_id`) REFERENCES `media` (`pk_media_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=102277 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102748 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +260,7 @@ CREATE TABLE `post_tags` (
   KEY `tagWithPost_idx` (`fk_tag_id`),
   CONSTRAINT `postWithTag` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`pk_post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tagWithPost` FOREIGN KEY (`fk_tag_id`) REFERENCES `tags` (`pk_tag_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=694347 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=697134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +279,24 @@ CREATE TABLE `post_verify` (
   PRIMARY KEY (`pk_verified_id`),
   KEY `postVerified_idx` (`fk_post_id`),
   CONSTRAINT `postVerified` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`pk_post_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=474338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=483613 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `post_views`
+--
+
+DROP TABLE IF EXISTS `post_views`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post_views` (
+  `pk_post_view_id` int NOT NULL AUTO_INCREMENT,
+  `fk_post_id` int NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`pk_post_view_id`),
+  KEY `fkPostViews_idx` (`fk_post_id`),
+  CONSTRAINT `fkPostViews` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`pk_post_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14513 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +327,7 @@ CREATE TABLE `posts` (
   KEY `postsCreatedInLastX_idx` (`created`),
   KEY `postsPublishedInLastX_idx` (`pub_date` DESC),
   CONSTRAINT `postOwner` FOREIGN KEY (`fk_site_id`) REFERENCES `sites` (`pk_site_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=105789 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=106262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,7 +351,7 @@ CREATE TABLE `sites` (
   PRIMARY KEY (`pk_site_id`),
   UNIQUE KEY `feed_url_UNIQUE` (`feed_url`),
   KEY `activeSitesOnly_idx` (`active`)
-) ENGINE=InnoDB AUTO_INCREMENT=1612 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1613 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -350,7 +367,7 @@ CREATE TABLE `tags` (
   PRIMARY KEY (`pk_tag_id`),
   UNIQUE KEY `tag_UNIQUE` (`tag`),
   KEY `tag_INDEX` (`tag`)
-) ENGINE=InnoDB AUTO_INCREMENT=95696 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96052 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -419,4 +436,4 @@ CREATE TABLE `users_subscriptions` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-06 14:54:02
+-- Dump completed on 2023-10-11 22:01:44
